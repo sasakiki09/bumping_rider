@@ -1,4 +1,5 @@
 import pyxel
+import json
 
 # Note on converting from MSX MML:
 # - Decrease 3 in "O" octave, and
@@ -7,6 +8,8 @@ import pyxel
 # Pyxel MML: https://github.com/kitao/pyxel/blob/main/docs/faq-en.md#api-specification-and-usage
 
 class Music:
+    TitleMusicPath = 'musics/title.json'
+
     def __init__(self, sound_index):
         self.sound_index = sound_index
         self.channels = [1, 2, 3]
@@ -97,25 +100,12 @@ class Music:
                             [index + 0],
                             [index + 1],
                             [index + 2])
+
         index += 3
-        s = pyxel.sounds[index + 0]
-        s.mml("T70V110L16" +
-              "O1CEGO2CO1CEGO2C" +
-              "O1CEGO2CO1CEGO2C" +
-              "O1CEGO2CO1CEGO2C" +
-              "O1CEGO2CO1CEGO2C")
-        s = pyxel.sounds[index + 1]
-        s.mml("T70V110L16@1" +
-              "O3CCR16EER16GG" +
-              "CCR16EER16GG" +
-              "CCR16EEGGR16" +
-              "CCCEEGGE")
-        s = pyxel.sounds[index + 2]
-        s.mml("T70V110L16@2" +
-              "O3AAR16O4DDR16R16E" +
-              "R16O3AR16O4DDR16R16E" +
-              "R16O3AR16O4DDER16R16" +
-              "R16O3AAO4DDER16D")
+        with open(self.TitleMusicPath, "rt") as fin:
+            music_json = json.loads(fin.read())
+            for ch, sound in enumerate(music_json):
+                pyxel.sounds[index + ch].set(*sound)
         pyxel.musics[4].set([],
                             [index + 0],
                             [index + 1],
