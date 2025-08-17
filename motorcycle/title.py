@@ -14,7 +14,7 @@ class Title:
     def __init__(self, chara_path, text_path):
         self.chara_image = pyxel.Image(128, 128)
         self.chara_image.load(0, 0, chara_path)
-        self.text_image = pyxel.Image(128, 128)
+        self.text_image = pyxel.Image(256, 256)
         self.text_image.load(0, 0, text_path)
         self.font = pyxel.Font("fonts/spleen-16x32.bdf")
         self.small_font = pyxel.Font("fonts/spleen-8x16.bdf")
@@ -91,12 +91,12 @@ class Title:
         pyxel.text(x, y, str, self.fg_color(), font)
 
     def show_text_image(self):
-        x = g_world.screen_size.x / 7
-        y = g_world.screen_size.y / 4 + self.base_y
+        x = g_world.screen_size.x / 12
+        y = g_world.screen_size.y / 24 + self.base_y
         pyxel.blt(x, y, self.text_image,
                   0, 0,
-                  128, 128,
-                  g_world.bg_index, 0, 2)
+                  256, 256,
+                  g_world.bg_index, 0, 1)
 
     def show_texts(self):
         x = g_world.screen_size.x / 8

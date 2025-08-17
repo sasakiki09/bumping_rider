@@ -15,7 +15,7 @@ class World:
         self.scale = Vec2(BikeSpriteWidth / BikeWorldLen,
                           -BikeSpriteWidth / BikeWorldLen)
         self.screen_size = Vec2(480, 360)
-        self.title = "Bumping Rider"
+        self.title = "Bumpy Flippy Bikey"
         self.fps = 30
         self.bg_index = 0
         self.origin_world = Vec2(0.0, 0.0)
