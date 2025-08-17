@@ -3,6 +3,7 @@ import random
 from world import *
 from savedata import *
 from physics import *
+from music import *
 
 class TimePeriod(Enum):
     Day = auto()
@@ -84,7 +85,7 @@ g_stages.append(Stage([ -3, 0,
                       20, 0,
                       100, 1],
                     TimePeriod.Day,
-                    0,
+                    Music.DaytimeMusicIndex,
                     0))
 
 # stage 2
@@ -95,13 +96,13 @@ g_stages.append(Stage([ -3, 0,
                       50, 2,
                       100, 2],
                     TimePeriod.Night,
-                    2,
+                    Music.NighttimeMusicIndex,
                     1))
 
 # stage 3
 g_stages.append(Stage([-3, 0, 200, 0],
                       TimePeriod.Day,
-                      3,
+                      Music.MountainMusicIndex,
                       100,
                       0.2,
                       0.05))
@@ -118,7 +119,7 @@ g_stages.append(Stage([ -3, 0,
                         101, -2,
                         200, 2],
                       TimePeriod.Night,
-                      3,
+                      Music.DaytimeMusicIndex,
                       4))
 
 # stage 5
@@ -146,7 +147,7 @@ g_stages.append(Stage([-3, 0,
                        130, 1,
                        200, 4],
                       TimePeriod.Night,
-                      2,
+                      Music.MidnightMusicIndex,
                       5,
                       0.2,
                       0.07))
