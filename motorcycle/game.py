@@ -221,8 +221,12 @@ class App:
         self.bike_rival.bike.reset()
         if self.state == GameState.GamePlay:
             self.music.play(self.stage().music)
+        elif self.state == GameState.GameTitle:
+            self.music.play(Music.TitleMusicIndex)
+        elif self.state == GameState.GameResult:
+            self.music.play(Music.ResultMusicIndex)
         else:
-            self.music.play(4)
+            raise()
 
     def to_title(self):
         self.title.reset()
