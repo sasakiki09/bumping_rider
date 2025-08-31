@@ -8,7 +8,7 @@ BikeSpriteHeight = 96 # [pixel]
 BikeSpriteScale = 1
 
 class World:
-    Version = "1.03"
+    Version = "1.04"
 
     def __init__(self):
         self.gravity = Vec2(0.0, -9.8)
@@ -47,5 +47,8 @@ class World:
         s_diff = screen_xy - self.origin_screen
         w_diff = s_diff / self.scale
         return self.origin_world + w_diff
+
+    def world_x_index(self, world_x):
+        return int(round(world_x * self.scale))
 
 g_world = World()

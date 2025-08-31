@@ -18,6 +18,35 @@ from music import *
 from game_bike import GameBike
 
 class GameGround:
+    def __init__(self):
+        self.cached_world_ys = None
+        self.world_x_min = None
+
+    def _update_world_ys(self):
+        wys = self.cached_world_ys
+        if wys == None:
+            sx0 = 0
+            sx1 = g_world.screen_size.x - 1
+            wys = []
+        else:
+            if len(wys) != g_world.screen_size.x: raise
+            w_x_min = g_world.world_xy(Vec2(0, 0)).x
+            w_x_diff = w_x_min - self.world_x_min
+            if w_x_diff > 0:
+                del wys[:w_x_diff]
+                sx0 = 0
+                sx1 = w_x_diff - 1
+            elif w_x_diff < 0:
+                del wys[w_x_diff:]
+                sx0 = g_world.screen_size.x + w_x_diff
+                sx1 = g_world.screen_size.x - 1
+            else:
+                return
+            for sx in range(sx0, sx1):
+                y, on_course = self.screen_y(x)
+                wys.insert(sx, (y, on_course))
+            self.cached_world_ys = wys
+
     def ground(self):
         return g_stages[g_world.stage_index].ground
 
@@ -38,6 +67,7 @@ class GameGround:
             return ColorPalette.Ground1
 
     def show(self):
+        self._update_world_ys()
         for x in range(g_world.screen_size.x):
             y, on_course = self.screen_y(x)
             if on_course:
